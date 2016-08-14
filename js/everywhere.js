@@ -1,28 +1,35 @@
 class Everywhere {
-  constructor(editables, config = {domain: 'http://localhost:5000'}) {
-    this.editables = editables || document.querySelectorAll('[data-editable]')
-    this.config = Object.assign({}, config, {
-      readURL: `${config.domain}/content/{editableName}/`,
-      saveURL: `${config.domain}/content/`,
+
+  constructor(config = {}) {
+    const server = config.server || 'http://localhost:5000'
+    this.config = Object.assign({}, {
+      server: server,
+      user: config.user || location.hostname,
+      readURL: `${server}/content/{user}/{editableName}/`,
+      saveURL: `${server}/content/{user}/{editableName}/`,
+      editables: document.querySelectorAll('[data-editable]'),
       fetch: {
         headers: new Headers(),
         mode: 'cors',
         cache: 'default',
       }
-    })
+    }, config)
+    if(!config.editables instanceof NodeList) {
+      throw new Exception('The `editables` config property should be a NodeList')
+    }
     this.loadContents()
     this.listenChanges()
   }
 
   get editor() {
     if(!this._editor) {
-      this._editor = new MediumEditor(this.editables)
+      this._editor = new MediumEditor(this.config.editables)
     }
     return this._editor
   }
 
   loadContents() {
-    ;[].forEach.call(this.editables, (editable) => {
+    ;[].forEach.call(this.config.editables, (editable) => {
       this.loadContent(editable)
     })
   }
@@ -30,14 +37,18 @@ class Everywhere {
   loadContent(editable) {
     fetch(this.prepareFetchURL(this.config.readURL, editable), this.config.fetch)
     .then(response => response.json())
-    .then(content => editable.innerHTML = content.body)
+    .then(content => {
+      if(content.body) {
+        editable.innerHTML = content.body
+      }
+    })
     .catch(console.error.bind(console))
   }
 
   listenChanges() {
     this.editor.subscribe('blur', (event, editable) => {
       const body = new FormData()
-      body.append('id', editable.dataset.editable)
+      body.append('key', this.config.key)
       body.append('body', editable.innerHTML)
 
       const fetchConf = Object.assign({}, this.config.fetch)
@@ -51,6 +62,8 @@ class Everywhere {
   }
 
   prepareFetchURL(url, editable) {
-    return url.replace('{editableName}', editable.dataset.editable)
+    return url.replace('{user}', this.config.user)
+              .replace('{editableName}', editable.dataset.editable)
+
   }
 }
