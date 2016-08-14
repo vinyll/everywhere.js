@@ -2,8 +2,10 @@ class Everywhere {
 
   constructor(config = {}) {
     const server = config.server || 'http://localhost:5000'
+    const params = this.constructor.getUrlParams()
     this.config = Object.assign({}, {
       server: server,
+      key: 'key' in params ? params['key'] : '',
       user: config.user || location.hostname,
       readURL: `${server}/content/{user}/{editableName}/`,
       saveURL: `${server}/content/{user}/{editableName}/`,
@@ -65,5 +67,14 @@ class Everywhere {
     return url.replace('{user}', this.config.user)
               .replace('{editableName}', editable.dataset.editable)
 
+  }
+
+  static getUrlParams(query = location.search) {
+    let params = {}
+    for(let kvString of query.slice(1).split('&')) {
+      let kvArray = kvString.split('=')
+      params[unescape(kvArray[0])] = unescape(kvArray[1])
+    }
+    return params
   }
 }
