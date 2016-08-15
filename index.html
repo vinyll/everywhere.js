@@ -3,11 +3,13 @@
 <section data-editable=block2>or me</section>
 <footer>This is not editable</footer>
 
-<link rel=stylesheet href=https://gitcdn.xyz/repo/yabwe/medium-editor/master/dist/css/medium-editor.min.css>
-<link rel=stylesheet href=https://gitcdn.xyz/repo/yabwe/medium-editor/master/dist/css/themes/beagle.min.css>
-<script src=https://gitcdn.xyz/repo/yabwe/medium-editor/master/dist/js/medium-editor.min.js></script>
+<link rel=stylesheet href=/css/medium-editor.min.css>
+<link rel=stylesheet href=/css/beagle.min.css>
+<script src=/js/medium-editor.min.js></script>
 <script src=/js/everywhere.js></script>
 
 <script>
-  new Everywhere()
+  new Everywhere({
+    server: 'http://158.58.170.155:8082'
+  })
 </script>
