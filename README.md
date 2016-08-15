@@ -5,18 +5,18 @@ Enable edit in place on any content, even static, with no installation!
 It even works for **editing content on static websites** like
 [Github Pages](https://pages.github.com/)!
 
-See [the basic demo](demo.html) that is a static webpage that you can
-[edit here](demo.html?key=easy secured key phrase).
+See [the basic demo](https://vinyll.github.io/everywhere.js/demo.html) that is a static webpage that you can
+[edit here](https://vinyll.github.io/everywhere.js/?key=vinyll demo key phrase).
 
 
 ## Common usage
 
-For basic usage see [the basic demo](demo.html).
+For basic usage see [the basic demo](https://vinyll.github.io/everywhere.js/).
 
 ### Explanations
 
 The editable version of a webpage is detected when a `?key=` is passed in
-the URL. eg: [http://localhost/demo.html?key=localhost demo](http://localhost/demo.html?key=localhost demo).
+the URL. eg: [http://localhost/?key=localhost demo](http://localhost/?key=localhost demo).
 
 You can create your own user and retrieve your personal key.
 Go to http://158.58.170.155:8082/#!/user/create_new_user, insert your domain hostname (like "_example.com_") and click on "try it out!".
@@ -52,4 +52,4 @@ You can roll you own API server. See the [Everywhere API](https://github.com/vin
 
 ## MIT license
 
-See the LICENSE.txt for further details.
+See the [LICENSE file](LICENSE.txt) for further details.
