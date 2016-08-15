@@ -18,6 +18,7 @@ var Everywhere = function () {
       user: config.user || location.hostname,
       readURL: server + '/content/{user}/{editableName}/',
       saveURL: server + '/content/{user}/{editableName}/',
+      edit: 'key' in params,
       editables: document.querySelectorAll('[data-editable]'),
       fetch: {
         headers: new Headers(),
@@ -25,11 +26,14 @@ var Everywhere = function () {
         cache: 'default'
       }
     }, config);
-    if (!config.editables instanceof NodeList) {
+    if (!this.config.editables instanceof NodeList) {
       throw new Exception('The `editables` config property should be a NodeList');
     }
     this.loadContents();
-    this.listenChanges();
+    // Enable editing.
+    if (this.config.edit) {
+      this.listenChanges();
+    }
   }
 
   _createClass(Everywhere, [{
