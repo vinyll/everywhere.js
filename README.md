@@ -5,7 +5,7 @@ Enable edit in place on any content, even static, with no installation!
 It even works for **editing content on static websites** like
 [Github Pages](https://pages.github.com/)!
 
-See [the basic demo](https://vinyll.github.io/everywhere.js/demo.html) that is a static webpage that you can
+See [the basic demo](https://vinyll.github.io/everywhere.js) that is a static webpage that you can
 [edit here](https://vinyll.github.io/everywhere.js/?key=vinyll demo key phrase).
 
 
