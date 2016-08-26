@@ -3,18 +3,20 @@
 
 <h1 data-editable=title>Edit in place demo</h1>
 <section data-editable=content>
-  You can click on me and start typing.<br>
-  If you select some text, a <a href=https://yabwe.github.io/medium-editor/>rich editor</a>
-  will appear!<br>
-  Note you can even edit the title above.
+  <p>
+    You can click on me and start typing.<br>
+    Note you can also edit the title above!
+  </p>
+  <p>
+    When editing, try to select some text. See the <a href="https://yabwe.github.io/medium-editor">Medium rich-text editor</a>!
+  </p>
 </section>
-<blockquote>The content above may have been edited by some demo user. Go to <a href="?key=vinyll demo key phrase">the editable version</a> to edit it.</blockquote>
+<blockquote>The content above may have been edited by some demo user. Go to <a href="?key=vinyll demo key phrase">the editable version</a> to modify it.</blockquote>
 <footer><a href=https://github.com/vinyll/everywhere.js>Source code available on github</a></footer>
 
-<link rel=stylesheet href=https://cdn.rawgit.com/yabwe/medium-editor/master/dist/css/medium-editor.min.css>
-<link rel=stylesheet href=https://cdn.rawgit.com/yabwe/medium-editor/master/dist/css/themes/beagle.min.css>
-<script src=https://cdn.rawgit.com/yabwe/medium-editor/master/dist/js/medium-editor.min.js></script>
 <script src=https://cdn.rawgit.com/vinyll/everywhere.js/master/dist/everywhere.min.js></script>
 
-<script>new Everywhere({server: 'https://everywhere.webnomad.org',
-user: 'vinyll.github.io'})</script>
+<script>new Everywhere({
+  server: 'https://everywhere.webnomad.org',
+  extensions: [EWMediumEditor]
+})</script>
